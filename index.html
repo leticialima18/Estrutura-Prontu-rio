@@ -7,13 +7,18 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
 
 <!-- Navbar -->
 <nav class="navbar navbar-dark bg-primary">
     <div class="container-fluid justify-content-center">
-        <span class="navbar-brand mb-0 h1">Prontuário Eletrônico</span>
+        <span class="navbar-brand mb-0 h1">
+            <i class="bi bi-hospital"></i> Prontuário Eletrônico
+        </span>
     </div>
 </nav>
 
@@ -21,9 +26,9 @@
 <form onsubmit="mostrarDados(); return false;">
 
     <!-- Dados do Paciente -->
-    <div class="card mb-4">
-        <div class="card-header bg-info text-white text-center">
-            Dados do Paciente
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-header bg-primary text-white text-center fw-bold">
+            <i class="bi bi-person"></i> Dados do Paciente
         </div>
         <div class="card-body">
             <div class="row">
@@ -50,9 +55,9 @@
     </div>
 
     <!-- Sinais Vitais -->
-    <div class="card mb-4">
-        <div class="card-header bg-info text-white text-center">
-            Sinais Vitais
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-header bg-danger text-white text-center fw-bold">
+            <i class="bi bi-heart-pulse"></i> Sinais Vitais
         </div>
         <div class="card-body">
             <div class="row">
@@ -73,9 +78,9 @@
     </div>
 
     <!-- Evolução -->
-    <div class="card mb-4">
-        <div class="card-header bg-info text-white text-center">
-            Evolução
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-header bg-warning text-dark text-center fw-bold">
+            <i class="bi bi-journal-text"></i> Evolução do Paciente
         </div>
         <div class="card-body">
             <textarea id="evolucao" class="form-control" rows="4"></textarea>
@@ -83,9 +88,9 @@
     </div>
 
     <!-- Medicação -->
-    <div class="card mb-4">
-        <div class="card-header bg-info text-white text-center">
-            Medicação
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-header bg-success text-white text-center fw-bold">
+            <i class="bi bi-capsule"></i> Medicação
         </div>
         <div class="card-body">
             <div class="row">
@@ -103,12 +108,19 @@
     </div>
 
     <!-- Botão -->
-    <div class="text-end">
-        <button class="btn btn-primary" type="submit">Salvar</button>
+    <div class="text-end mb-5">
+        <button class="btn btn-success btn-lg shadow">
+            <i class="bi bi-save"></i> Salvar Prontuário 
+        </button>
     </div>
 
     <!-- Resultado -->
-    <div id="resultado" class="alert alert-secondary mt-4 d-none"></div>
+    <div id="resultado" class="card shadow d-none">
+        <div class="card-header bg-dark text-white">
+            Resultado Prontuário
+        </div>
+        <div class="card-body"></div>
+    </div>
 
 </form>
 </div>
@@ -127,7 +139,6 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Script -->
 <script>
 function mostrarDados() {
     let nome = document.getElementById("nome").value;
@@ -143,27 +154,26 @@ function mostrarDados() {
     let horario = document.getElementById("horario").value;
 
     let resultado = `
-        <h5>Prontuário do Paciente</h5>
-        <strong>Nome:</strong> ${nome} <br>
-        <strong>Idade:</strong> ${idade} <br>
-        <strong>Sexo:</strong> ${sexo} <br>
-        <strong>Pressão:</strong> ${pressao} <br>
-        <strong>Frequência:</strong> ${frequencia} <br>
-        <strong>Temperatura:</strong> ${temperatura} <br>
-        <strong>Saturação:</strong> ${saturacao} <br>
-        <strong>Evolução:</strong> ${evolucao} <br>
-        <strong>Medicamento:</strong> ${medicamento} <br>
-        <strong>Dosagem:</strong> ${dosagem} <br>
-        <strong>Horário:</strong> ${horario}
+       <ul class="list-group">
+        <li class="list-group-item"><strong>Nome:</strong> ${nome}</li>
+        <li class="list-group-item"><strong>Idade:</strong> ${idade}</li>
+        <li class="list-group-item"><strong>Sexo:</strong> ${sexo}</li>
+        <li class="list-group-item"><strong>Pressão:</strong> ${pressao}</li>
+        <li class="list-group-item"><strong>Frequência:</strong> ${frequencia}</li>
+        <li class="list-group-item"><strong>Temperatura:</strong> ${temperatura}</li>
+        <li class="list-group-item"><strong>Saturação:</strong> ${saturacao}</li>
+        <li class="list-group-item"><strong>Evolução:</strong> ${evolucao}</li>
+        <li class="list-group-item"><strong>Medicamento:</strong> ${medicamento}</li>
+        <li class="list-group-item"><strong>Dosagem:</strong> ${dosagem}</li>
+        <li class="list-group-item"><strong>Horário:</strong> ${horario}</li>
+       </ul>
     `;
 
     let caixa = document.getElementById("resultado");
-    caixa.innerHTML = resultado;
+    caixa.querySelector(".card-body").innerHTML = resultado;
     caixa.classList.remove("d-none");
 
-    let toast = new bootstrap.Toast(document.getElementById('toastSucesso'), {
-        delay: 3000
-    });
+    let toast = new bootstrap.Toast(document.getElementById('toastSucesso'));
     toast.show();
 }
 </script>
